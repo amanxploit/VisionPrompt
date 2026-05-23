@@ -6,17 +6,18 @@ export type MediaItem = {
 export interface UniversalPrompt {
   id: string;
   title: string;
-  prompt: string;
-  media: MediaItem[];
-  author: {
-    name: string;
-    avatar: string;
-  };
-  stats: {
-    likes: number;
-    views: number;
-  };
-  model: string;
-  source: string; // e.g., 'meigen', 'midjourney_hub', 'local'
+  description: string;
+  content: string;
+  media: any[];
+  source: string;
   sourceLink: string;
+  
+  // Add the '?' to make these optional
+  prompt?: string;     // Optional
+  author?: string;     // Optional
+  model?: string;      // Optional
+  stats?: {            // Optional
+    likes?: number;
+    views?: number;
+  };
 }

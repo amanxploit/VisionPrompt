@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-let cachedData: any[] = null;
+let cachedData: any[] | null = null;
 
 export async function getPromptsData() {
   // Return cache if it exists to prevent browser/server hang
