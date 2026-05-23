@@ -34,6 +34,14 @@ export function PromptCardSimple({ prompt, index }: PromptCardSimpleProps) {
 
   const hasVideo = isVideo(mediaUrl);
 
+  const getProxiedUrl = (url: string) => {
+  if (!url) return '';
+  // This calls your own internal API route
+  return `/api/proxy-image?url=${encodeURIComponent(url)}`;
+};
+
+
+
   return (
     <div onClick={handleClick} className="cursor-pointer group">
       <div className="relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 aspect-square">
@@ -56,7 +64,7 @@ export function PromptCardSimple({ prompt, index }: PromptCardSimpleProps) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
             
-              src={mediaUrl}
+              src={getProxiedUrl(mediaUrl)}
               alt={prompt.title || 'Prompt image'}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
