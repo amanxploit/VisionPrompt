@@ -47,11 +47,11 @@ export async function GET(request: NextRequest) {
     // Sometimes API returns other models even if we ask for one. 
     // This ensures the user ONLY sees the model they clicked.
     let filteredData = allMeigenData;
-    if (model !== '') {
-      filteredData = allMeigenData.filter(item => 
-        item.model.toLowerCase().includes(model.toLowerCase())
-      );
-    }
+    // if (model !== '') {
+    //   filteredData = allMeigenData.filter(item => 
+    //     item.model.toLowerCase().includes(model.toLowerCase())
+    //   );
+    // }
 
     // 4. Sorting (if not already sorted by API)
     if (sort === 'likes') {

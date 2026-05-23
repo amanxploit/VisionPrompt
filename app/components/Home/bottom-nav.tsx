@@ -12,8 +12,8 @@ export function BottomNav() {
   const navItems = [
     { id: 'home', label: 'Home', icon: Home, path: '/home' },
     // { id: 'search', label: 'Search', icon: Search, path: '/search' },
-    { id: 'add', label: 'Add', icon: Plus, path: '/create' },
-    { id: 'save', label: 'Save', icon: Bookmark, path: '/saved' },
+    // { id: 'add', label: 'Add', icon: Plus, path: '/create' },
+    // { id: 'save', label: 'Save', icon: Bookmark, path: '/saved' },
     { id: 'trending', label: 'Trend', icon: TrendingUp, path: '/trending' },
   ];
 
