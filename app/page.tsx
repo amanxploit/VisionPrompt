@@ -1,65 +1,103 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import { SplashScreen } from './components/splash-screen';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const [showSplash, setShowSplash] = useState(true);
+  const router = useRouter();
+
+
+  useEffect(() => {
+    // Check if splash screen has been shown before in this session
+    const splashShown = sessionStorage.getItem('splashShown');
+    if (splashShown) {
+      setShowSplash(false);
+    }
+  }, []);
+
+  const handleSplashComplete = () => {
+    sessionStorage.setItem('splashShown', 'true');
+    setShowSplash(false);
+  };
+
+
+  const handleGetStarted = () => {
+    router.push('/home');
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+      {!showSplash && (
+        <main className="min-h-screen bg-white dark:bg-black">
+          <div className="flex flex-col items-center justify-center min-h-screen px-4">
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-center"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+                className="mb-8"
+              >
+                <svg 
+                  width="100" 
+                  height="100" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="text-black dark:text-white"
+                >
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </motion.div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-black dark:text-white mb-4">
+                VisionPrompt
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8">
+                Transform your ideas into stunning visuals with AI
+              </p>
+              
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="space-y-4"
+              >
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button onClick={() => {handleGetStarted()}} className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
+                    Get Started
+                  </button>
+                  {/* <button className="px-6 py-3 border border-gray-300 dark:border-gray-700 text-black dark:text-white rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
+                    Learn More
+                  </button> */}
+                </div>
+                
+                <p className="text-sm text-gray-500 dark:text-gray-500 mt-8">
+                  Coming soon: AI-powered image generation from text prompts
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </main>
+      )}
+    </>
   );
 }
