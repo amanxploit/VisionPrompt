@@ -71,7 +71,7 @@ export default function PromptsPage() {
     }
   }, [page, loadPrompts, activeModel, activeSort]);
 
-  const observerRef = useRef<IntersectionObserver>();
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const lastElementRef = useCallback((node: HTMLDivElement) => {
     if (loading || loadingMore) return; // STOP if any loading is happening
     if (observerRef.current) observerRef.current.disconnect();
