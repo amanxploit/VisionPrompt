@@ -43,6 +43,7 @@ export function PromptCardSimple({ prompt, index }: PromptCardSimpleProps) {
               src={mediaUrl}
               muted
               loop
+              referrerPolicy="no-referrer"
               playsInline
               autoPlay
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -54,10 +55,12 @@ export function PromptCardSimple({ prompt, index }: PromptCardSimpleProps) {
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img
+            
               src={mediaUrl}
               alt={prompt.title || 'Prompt image'}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
+              referrerPolicy="no-referrer"
               onError={() => {
                 console.log('Image failed to load:', mediaUrl);
                 setMediaError(true);
