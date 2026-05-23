@@ -36,10 +36,9 @@ export function PromptCardSimple({ prompt, index }: PromptCardSimpleProps) {
 
   const getProxiedUrl = (url: string) => {
   if (!url) return '';
-  // This calls your own internal API route
-  return `/api/proxy-image?url=${encodeURIComponent(url)}`;
+  // This wraps your URL inside the weserv.nl proxy
+  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
 };
-
 
 
   return (
@@ -48,7 +47,7 @@ export function PromptCardSimple({ prompt, index }: PromptCardSimpleProps) {
         {mediaUrl && !mediaError ? (
           hasVideo ? (
             <video
-              src={mediaUrl}
+              src={getProxiedUrl(mediaUrl)}
               muted
               loop
               referrerPolicy="no-referrer"
