@@ -90,7 +90,10 @@ export default function PromptsPage() {
       <header className="sticky top-0 z-50 bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 px-4 py-4">
         <div className="max-w-5xl mx-auto space-y-5">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold italic tracking-tighter">VPGallery</h1>
+            <h1 className="text-2xl font-bold italic tracking-tighter">
+              {/* VPGallery */}
+              <img src={'https://images.meigen.ai/tweets/2059493565768815049/0.jpg'}></img>
+              </h1>
             <div className="relative flex items-center gap-2 text-sm font-medium">
               <ArrowUpDown size={14} className="text-zinc-400" />
               <select 
